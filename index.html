@@ -142,9 +142,12 @@
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 12px;
+            font-size: 12px;
             display: none;
-            white-space: nowrap;
+            /* white-space: nowrap; Removed to allow wrapping */
             z-index: 1000;
+            text-align: center;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -165,7 +168,8 @@
             </div>
             <!-- Killua from Hunter x Hunter. New favorite show. -->
             <div class="gallery-item killua">
-                <img src="killua.jpg?v=0" alt="Killua" data-date="01.17.2026">
+                <img src="killua.jpg?v=0" alt="Killua" data-date="01.17.2026"
+                    data-caption="Killua from Hunter x Hunter. Favorite show!">
             </div>
             <div class="gallery-item dragon">
                 <img src="dragon.jpg?v=0" alt="Dragon Drawing" data-date="01.07.2026">
@@ -186,7 +190,11 @@
             // Desktop: Hover behavior
             img.addEventListener('mousemove', (e) => {
                 if (window.innerWidth > 768) {
-                    tooltip.textContent = img.dataset.date;
+                    let content = img.dataset.date;
+                    if (img.dataset.caption) {
+                        content += '<br>' + img.dataset.caption;
+                    }
+                    tooltip.innerHTML = content;
                     tooltip.style.display = 'block';
                     tooltip.style.left = e.pageX + 15 + 'px';
                     tooltip.style.top = e.pageY + 15 + 'px';
@@ -196,7 +204,11 @@
             // Mobile: Click behavior
             img.addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
-                    tooltip.textContent = img.dataset.date;
+                    let content = img.dataset.date;
+                    if (img.dataset.caption) {
+                        content += '<br>' + img.dataset.caption;
+                    }
+                    tooltip.innerHTML = content;
                     tooltip.style.display = 'block';
                     tooltip.style.left = e.pageX + 15 + 'px';
                     tooltip.style.top = e.pageY + 15 + 'px';
