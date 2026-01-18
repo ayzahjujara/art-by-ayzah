@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ayzah Jujara</title>
+    <link rel="icon" type="image/png" href="pinkflower.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- Body & Hero --- */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #111;
+        }
+
+        .hero {
+            background: linear-gradient(180deg,
+                    #ffd6f1 0%,
+                    #ffe0f5 20%,
+                    #ffeafa 40%,
+                    #fff2fc 60%,
+                    #fff8fb 80%,
+                    #ffffff 100%);
+            padding: 60px 100px;
+        }
+
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin: 0 0 12px;
+            text-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            opacity: 0.7;
+        }
+
+        .content {
+            padding: 25px 100px;
+            display: flex;
+            justify-content: center;
+            /* Centers the whole grid */
+        }
+
+        /* --- Mosaic Gallery --- */
+        .gallery {
+            /* Switch to Masonry Layout */
+            column-count: 2;
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            /* Prevents splitting across columns */
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            cursor: crosshair;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            body {
+                overflow-x: hidden;
+            }
+
+            .hero {
+                padding: 36px 20px;
+
+                background: linear-gradient(180deg,
+                        #ffd6f1 0%,
+                        #ffe0f5 20%,
+                        #ffeafa 40%,
+                        #fff2fc 60%,
+                        #fff8fb 80%,
+                        #ffffff 100%);
+                padding: 60px 30px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                opacity: 0.7;
+            }
+
+            /* 🔴 THIS IS THE KEY FIX */
+            .content {
+                padding: 24px 16px 40px;
+                display: block;
+                /* turn OFF flex */
+            }
+
+            .gallery {
+                column-count: 1;
+            }
+
+            .gallery-item img {
+                width: 100%;
+                height: auto;
+                border-radius: 6px;
+            }
+
+
+
+        }
+
+
+
+
+
+
+        /* Tooltip */
+        #tooltip {
+            position: absolute;
+            pointer-events: none;
+            background-color: rgba(251, 129, 255, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: none;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero">
+        <h1>art by ayzah</h1>
+        <div class="subtitle">i like to draw ◡̈</div>
+    </section>
+
+    <section class="content">
+        <div class="gallery">
+            <div class="gallery-item cat">
+                <img src="cat.jpg?v=0" alt="Cat Sketch" data-date="05.23.2025">
+            </div>
+            <div class="gallery-item fish">
+                <img src="fish.jpg?v=0" alt="Fish Sketch" data-date="01.05.2023">
+            </div>
+            <!-- Killua from Hunter x Hunter. New favorite show. -->
+            <div class="gallery-item killua">
+                <img src="killua.jpg?v=0" alt="Killua" data-date="01.17.2026">
+            </div>
+            <div class="gallery-item dragon">
+                <img src="dragon.jpg?v=0" alt="Dragon Drawing" data-date="01.07.2026">
+            </div>
+            <div class="gallery-item jellyfish">
+                <img src="jellyfish.jpg?v=0" alt="Jellyfish Drawing" data-date="12.31.2024">
+            </div>
+        </div>
+    </section>
+
+    <div id="tooltip"></div>
+
+    <script>
+        const tooltip = document.getElementById('tooltip');
+        const galleryImages = document.querySelectorAll('.gallery img');
+
+        galleryImages.forEach(img => {
+            // Desktop: Hover behavior
+            img.addEventListener('mousemove', (e) => {
+                if (window.innerWidth > 768) {
+                    tooltip.textContent = img.dataset.date;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = e.pageX + 15 + 'px';
+                    tooltip.style.top = e.pageY + 15 + 'px';
+                }
+            });
+
+            // Mobile: Click behavior
+            img.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    tooltip.textContent = img.dataset.date;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = e.pageX + 15 + 'px';
+                    tooltip.style.top = e.pageY + 15 + 'px';
+
+                    // Optional: Hide after 3 seconds so it doesn't stay forever
+                    setTimeout(() => {
+                        tooltip.style.display = 'none';
+                    }, 3000);
+                }
+            });
+
+            img.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>
