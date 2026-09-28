@@ -10,7 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap"
         rel="stylesheet">
     <style>
-        /* --- Body & Hero --- */
+   
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
@@ -47,18 +47,17 @@
             padding: 25px 100px;
             display: flex;
             justify-content: center;
-            /* Centers the whole grid */
+         
         }
 
-        /* --- Mosaic Gallery --- */
         .gallery {
-            /* Switch to Masonry Layout */
+    
             column-count: 2;
             column-gap: 20px;
         }
 
         .gallery-item {
-            /* Prevents splitting across columns */
+          
             break-inside: avoid;
             margin-bottom: 20px;
         }
@@ -78,7 +77,6 @@
 
 
 
-        /* Responsive */
         @media (max-width: 768px) {
 
             body {
@@ -107,11 +105,10 @@
                 opacity: 0.7;
             }
 
-            /* 🔴 THIS IS THE KEY FIX */
             .content {
                 padding: 24px 16px 40px;
                 display: block;
-                /* turn OFF flex */
+         
             }
 
             .gallery {
@@ -131,9 +128,6 @@
 
 
 
-
-
-        /* Tooltip */
         #tooltip {
             position: absolute;
             pointer-events: none;
@@ -144,7 +138,7 @@
             font-size: 12px;
             font-size: 12px;
             display: none;
-            /* white-space: nowrap; Removed to allow wrapping */
+            
             z-index: 1000;
             text-align: center;
             line-height: 1.4;
@@ -187,7 +181,7 @@
         const galleryImages = document.querySelectorAll('.gallery img');
 
         galleryImages.forEach(img => {
-            // Desktop: Hover behavior
+            
             img.addEventListener('mousemove', (e) => {
                 if (window.innerWidth > 768) {
                     let content = img.dataset.date;
@@ -201,7 +195,7 @@
                 }
             });
 
-            // Mobile: Click behavior
+            
             img.addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
                     let content = img.dataset.date;
@@ -213,7 +207,7 @@
                     tooltip.style.left = e.pageX + 15 + 'px';
                     tooltip.style.top = e.pageY + 15 + 'px';
 
-                    // Optional: Hide after 3 seconds so it doesn't stay forever
+                    
                     setTimeout(() => {
                         tooltip.style.display = 'none';
                     }, 3000);
